@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<body>
+
+<aside class="sidebar" layout:fragment="sidebar(activePage)">
+
+    <div class="sidebar-header">
+        <div class="sidebar-brand">SmarTect</div>
+        <div class="sidebar-sub">AI Monitoring Console</div>
+    </div>
+
+    <nav class="sidebar-menu">
+
+        <a th:href="@{/dashboard}"
+           class="sidebar-item"
+           th:classappend="${activePage} == 'dashboard' ? ' active'">
+            <span class="sidebar-item-label">대시보드</span>
+        </a>
+
+        <a th:href="@{/eventboard}"
+           class="sidebar-item"
+           th:classappend="${activePage} == 'events' ? ' active'">
+            <span class="sidebar-item-label">이벤트 목록</span>
+        </a>
+
+        <a th:href="@{/event-stats}"
+           class="sidebar-item"
+           th:classappend="${activePage} == 'stats' ? ' active'">
+            <span class="sidebar-item-label">이벤트 통계(문서화)</span>
+        </a>
+
+        <a th:href="@{/board}"
+           class="sidebar-item"
+           th:classappend="${activePage} == 'board' ? ' active'">
+            <span class="sidebar-item-label">게시판</span>
+        </a>
+
+        <a th:href="@{/about}"
+           class="sidebar-item"
+           th:classappend="${activePage} == 'about' ? ' active'">
+            <span class="sidebar-item-label">About us</span>
+        </a>
+
+    </nav>
+
+    <div class="sidebar-footer">
+        <div class="sidebar-footer-title">SmarTect · Control Center</div>
+        <div class="sidebar-footer-sub">Team DS · 2025</div>
+    </div>
+
+</aside>
+
+</body>
+</html>

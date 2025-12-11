@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SmarTect</title>
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
+</head>
+
+<body>
+
+<header class="top-navbar" layout:fragment="header">
+
+    <!-- 왼쪽 영역 -->
+    <div class="nav-left">
+        <div class="hamburger" onclick="toggleSidebar()">☰</div>
+        <span class="brand">SmarTect</span>
+    </div>
+
+    <!-- 중앙 메뉴(PC 버전은 숨김) -->
+    <!-- 메뉴는 sidebar로 이동했으므로 주석 유지 -->
+
+    <!-- 오른쪽 관리자 영역 -->
+    <div class="nav-right">
+        <span class="admin-label" th:text="${adminName}">관리자</span>
+
+        <form action="/logout" method="post" class="logout-form">
+            <button type="submit" class="logout-btn">로그아웃</button>
+        </form>
+    </div>
+
+</header>
+
+</body>
+</html>

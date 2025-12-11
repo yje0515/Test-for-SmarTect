@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/base">
+
+<head layout:title="Event Board">
+
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
+    <link rel="stylesheet" th:href="@{/css/eventboard.css}">
+</head>
+
+<!--<body>-->
+
+<section layout:fragment="content">
+
+    <div class="container">
+
+        <!-- 왼쪽: 이벤트 목록 -->
+        <div class="event-list">
+            <h2>이벤트 목록</h2>
+
+            <!-- 검색 입력 -->
+            <div class="filter-row">
+                <input id="searchBox" type="text" placeholder="검색(카메라/위치/유형)">
+                <button class="primary-btn" onclick="loadEvents()">검색</button>
+            </div>
+
+            <!-- 카테고리 필터 -->
+            <div class="filter-group">
+                <span class="filter-label">이벤트 유형</span>
+                <div class="chip-group" id="categoryChips">
+                    <button class="chip-btn" data-category="FIRE" onclick="toggleCategory(this, 'FIRE')">Fire</button>
+                    <button class="chip-btn" data-category="SUSPICIOUS" onclick="toggleCategory(this, 'SUSPICIOUS')">
+                        Suspicious
+                    </button>
+                    <button class="chip-btn" data-category="ACCESS" onclick="toggleCategory(this, 'ACCESS')">Access
+                    </button>
+                    <button class="chip-btn" data-category="TOUCH" onclick="toggleCategory(this, 'TOUCH')">Touch
+                    </button>
+                </div>
+            </div>
+
+            <!-- 기간 필터 -->
+            <div class="filter-group">
+                <span class="filter-label">기간</span>
+                <div class="chip-group" id="periodChips">
+                    <button class="chip-btn period active" onclick="setPeriod(this, 'TODAY')">오늘</button>
+                    <button class="chip-btn period" onclick="setPeriod(this, 'WEEK')">1주일</button>
+                    <button class="chip-btn period" onclick="setPeriod(this, 'MONTH')">1개월</button>
+                    <button class="chip-btn period" onclick="setPeriod(this, 'ALL')">전체</button>
+                </div>
+            </div>
+
+            <ul id="eventList"></ul>
+        </div>
+
+        <!-- 오른쪽: 이벤트 상세 -->
+        <div class="event-detail">
+            <h2>이벤트 상세</h2>
+
+            <div id="detailBox" class="detail-box">
+                <p>이벤트를 선택하세요</p>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<script>
+
+    let selectedCategories = new Set();
+    let selectedPeriod = 'TODAY';
+
+    // 카테고리 토글 기능
+    function toggleCategory(btn, category) {
+        if (selectedCategories.has(category)) {
+            selectedCategories.delete(category);
+            btn.classList.remove("active");
+        } else {
+            selectedCategories.add(category);
+            btn.classList.add("active");
+        }
+        loadEvents();
+    }
+
+    // 기간 단일 선택 기능
+    function setPeriod(btn, period) {
+        selectedPeriod = period;
+
+        document.querySelectorAll("#periodChips .chip-btn").forEach(b => {
+            b.classList.remove("active");
+        });
+        btn.classList.add("active");
+
+        loadEvents();
+    }
+
+    // 이벤트 목록 로드
+    function loadEvents() {
+
+        const keyword = document.getElementById("searchBox").value || "";
+        const categoriesParam = Array.from(selectedCategories).join(",");
+
+        const url = `/api/events?keyword=${encodeURIComponent(keyword)}`
+            + `&categories=${encodeURIComponent(categoriesParam)}`
+            + `&period=${encodeURIComponent(selectedPeriod)}`;
+
+        fetch(url)
+            .then(res => res.json())
+            .then(events => {
+                const ul = document.getElementById("eventList");
+                ul.innerHTML = "";
+
+                if (!events || events.length === 0) {
+                    ul.innerHTML = `<li>조건에 해당하는 이벤트가 없습니다.</li>`;
+                    return;
+                }
+
+                events.forEach(ev => {
+                    const li = document.createElement("li");
+                    li.innerHTML = `
+                        <strong>[${ev.eventType}]</strong> ${ev.location}<br>
+                        <small>${ev.cameraName} · ${ev.timestamp.replace("T"," ")}</small>
+                    `;
+                    li.onclick = () => loadDetail(ev.id);
+                    ul.appendChild(li);
+                });
+            });
+    }
+
+    // 이벤트 상세 불러오기 + LocalStorage 저장
+    function loadDetail(id) {
+
+        localStorage.setItem("selectedEventId", id);
+
+        fetch(`/api/events/${id}`)
+            .then(res => res.json())
+            .then(ev => {
+                if (!ev) return;
+
+                const box = document.getElementById("detailBox");
+                box.innerHTML = `
+                    <h3>${ev.eventType} <span style="font-size:13px; opacity:0.8;">(${ev.severity})</span></h3>
+                    <p><strong>카메라:</strong> ${ev.cameraName}</p>
+                    <p><strong>위치:</strong> ${ev.location}</p>
+                    <p><strong>내용:</strong> ${ev.description}</p>
+                    ${ev.thumbnailUrl ? `<img src="${ev.thumbnailUrl}" style="width:320px; margin-top:10px; border-radius:8px;">` : ""}
+                    <p style="margin-top:10px;"><small>${ev.timestamp.replace("T"," ")}</small></p>
+                `;
+            });
+    }
+
+    // 초기 로드: 목록 + 저장된 상세 이벤트 복원
+    window.onload = function() {
+        loadEvents();
+
+        const savedId = localStorage.getItem("selectedEventId");
+        if (savedId) {
+            loadDetail(savedId);
+        }
+    };
+</script>
+<!--</body>-->
+</html>

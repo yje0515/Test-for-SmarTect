@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/base">
+
+<head>
+    <title>About Us</title>
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
+    <link rel="stylesheet" th:href="@{/css/about.css}">
+</head>
+
+<body>
+
+<section layout:fragment="content">
+
+    <div class="about-container">
+        <h1 class="about-title">Our Team</h1>
+        <p class="about-subtitle">SmarTect AI Monitoring System · Team DS</p>
+
+        <div class="team-grid">
+
+            <!-- 반복문 가능하지만 지금은 더미 데이터 6명 고정 -->
+            <div class="team-card">
+                <img src="/images/team1.jpg">
+                <h3>홍길동</h3>
+                <p>Backend Developer</p>
+                <p>Email: team1@sample.com</p>
+                <a href="https://github.com/sample1" target="_blank">GitHub</a>
+            </div>
+
+            <div class="team-card">
+                <img src="/images/team2.jpg">
+                <h3>김지민</h3>
+                <p>AI Engineer</p>
+                <p>Email: team2@sample.com</p>
+                <a href="https://github.com/sample2" target="_blank">GitHub</a>
+            </div>
+
+            <div class="team-card">
+                <img src="/images/team3.jpg">
+                <h3>박서준</h3>
+                <p>Frontend Developer</p>
+                <p>Email: team3@sample.com</p>
+                <a href="https://github.com/sample3" target="_blank">GitHub</a>
+            </div>
+
+            <div class="team-card">
+                <img src="/images/team4.jpg">
+                <h3>이지은</h3>
+                <p>Backend & Vision Dev</p>
+                <p>Email: team4@sample.com</p>
+                <a href="https://github.com/sample4" target="_blank">GitHub</a>
+            </div>
+
+            <div class="team-card">
+                <img src="/images/team5.jpg">
+                <h3>최민수</h3>
+                <p>DevOps Engineer</p>
+                <p>Email: team5@sample.com</p>
+                <a href="https://github.com/sample5" target="_blank">GitHub</a>
+            </div>
+
+            <div class="team-card">
+                <img src="/images/team6.jpg">
+                <h3>정유진</h3>
+                <p>Data Analyst</p>
+                <p>Email: team6@sample.com</p>
+                <a href="https://github.com/sample6" target="_blank">GitHub</a>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+</body>
+</html>

@@ -1,0 +1,194 @@
+/* ========================= header ========================= */
+
+.top-navbar {
+    width: 100%;
+    height: 60px;
+    background: #121a24;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 18px;
+    border-bottom: 1px solid #1f2b38;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 50;
+}
+
+.brand {
+    font-size: 20px;
+    font-weight: 700;
+    color: #4da6ff;
+}
+
+
+/* 관리자 + 로그아웃 버튼 */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-label {
+    font-size: 14px;
+    color: #b8c5d1;
+}
+
+.logout-form {
+    margin-right: 40px;
+}
+
+.logout-btn {
+    background: #ff4d4d;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    color: white;
+    transition: 0.2s;
+}
+
+.logout-btn:hover {
+    background: #e64545;
+}
+
+/* 햄버거 버튼 (모바일) */
+.hamburger {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #d9e0e8;
+}
+
+/* 반응형 */
+@media (max-width: 900px) {
+
+    .hamburger {
+        display: block;
+    }
+
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        background: #0e1621;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        padding: 15px;
+        border-top: 1px solid #1f2b38;
+    }
+
+    .nav-menu.open {
+        display: flex;
+    }
+}
+
+/* ========================= FOOTER ========================= */
+.footer {
+    margin-top: 40px;
+    width: 100%;
+    padding: 15px 0;
+    text-align: center;
+    font-size: 13px;
+    color: #7a8a99;
+    border-top: 1px solid #1f2b38;
+    background: #0e1621;
+}
+
+/* ========================= SIDEBAR ========================= */
+
+
+
+/* 사이드바: 헤더 높이(60px) 아래부터 전체 높이 고정 */
+.sidebar {
+    position: fixed;
+    top: 60px;            /* 상단 헤더 높이와 동일하게 */
+    left: 0;
+    bottom: 0;
+    width: 220px;
+    background: #050b12;
+    border-right: 1px solid #1f2b38;
+    padding: 16px 14px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* 사이드바 상단 브랜드 */
+.sidebar-header {
+    margin-bottom: 12px;
+}
+
+.sidebar-brand {
+    font-size: 18px;
+    font-weight: 700;
+    color: #4da6ff;
+}
+
+.sidebar-sub {
+    font-size: 11px;
+    color: #7b8a9b;
+}
+
+/* 메뉴 영역 */
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #cfd8e5;
+    font-size: 14px;
+    transition: background 0.15s, color 0.15s;
+}
+
+.sidebar-item:hover {
+    background: #152131;
+    color: #ffffff;
+}
+
+.sidebar-item.active {
+    background: #4da6ff;
+    color: #0e1621;
+}
+
+/* 라벨만 따로 둔 이유: 나중에 아이콘 추가 가능 */
+.sidebar-item-label {
+    flex: 1;
+}
+
+/* 사이드바 하단 정보 */
+.sidebar-footer {
+    margin-top: auto;
+    font-size: 11px;
+    color: #7b8a9b;
+    border-top: 1px solid #17202e;
+    padding-top: 10px;
+}
+
+.sidebar-footer-title {
+    font-weight: 500;
+}
+
+.sidebar-footer-sub {
+    font-size: 10px;
+    opacity: 0.8;
+}
+
+/* 실제 본문 영역 */
+.page-content {
+padding-left: 240px;  /* sidebar width + 여백 */
+    margin-left: 220px;      /* 사이드바 너비만큼 밀어냄 */
+    padding: 20px;
+    box-sizing: border-box;
+}

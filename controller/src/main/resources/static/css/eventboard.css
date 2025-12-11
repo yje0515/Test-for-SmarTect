@@ -1,0 +1,202 @@
+/* ========================= 기본 레이아웃 ========================= */
+
+body {
+    padding-top: 60px;
+    margin: 0;
+    background: #0e1621;
+    font-family: 'Pretendard', sans-serif;
+    color: #dfe6ee;
+}
+
+.container {
+    display: flex;
+    height: calc(100vh - 60px);
+}
+
+/* 왼쪽 목록 영역 */
+.event-list {
+    width: 35%;
+    background: #1c2833;
+    padding: 20px;
+    border-right: 1px solid #1f2b38;
+    overflow-y: auto;
+}
+
+.event-list h2 {
+    margin-top: 0;
+    color: #4da6ff;
+}
+
+/* 오른쪽 상세 영역 */
+.event-detail {
+    flex: 1;
+    padding: 20px;
+    background: #0e1621;
+    overflow-y: auto;
+}
+
+.event-detail h2 {
+    color: #4da6ff;
+    margin-top: 0;
+}
+
+/* ========================= 검색 필터 ========================= */
+
+.filter-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.filter-row input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #2b3a47;
+    background: #162029;
+    color: white;
+}
+
+.primary-btn {
+    padding: 9px 14px;
+    border-radius: 6px;
+    border: none;
+    background: #4da6ff;
+    color: #0e1621;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.primary-btn:hover {
+    background: #6bb7ff;
+}
+
+/* ========================= 필터 그룹 ========================= */
+
+.filter-group {
+    margin-bottom: 14px;
+}
+
+.filter-label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
+    color: #9fb4c8;
+}
+
+.chip-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.chip-btn {
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid #2b3a47;
+    background: #1c2833;
+    color: #dfe6ee;
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+.chip-btn:hover {
+    background: #273544;
+}
+
+.chip-btn.active {
+    background: #4da6ff;
+    border-color: #4da6ff;
+    color: #0e1621;
+}
+
+/* ========================= 이벤트 목록 ========================= */
+
+#eventList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#eventList li {
+    background: #162029;
+    padding: 14px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+#eventList li:hover {
+    background: #1c2833;
+}
+
+#eventList li strong {
+    color: #4da6ff;
+}
+
+/* ========================= 상세 박스 ========================= */
+
+.detail-box {
+    background: #1c2833;
+    padding: 20px;
+    border-radius: 10px;
+    color: #dfe6ee;
+}
+
+.detail-box h3 {
+    margin-top: 0;
+    color: #4da6ff;
+}
+
+/* ========================= 테이블 스타일 (대시보드 표처럼) ========================= */
+
+.event-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.event-table th,
+.event-table td {
+    padding: 8px 5px;
+    text-align: left;
+}
+
+.event-table tr:nth-child(even) {
+    background: #162029;
+}
+
+/* ========================= dot 색상 ========================= */
+
+.dot {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+
+.dot.danger { background: #ff4d4d; }
+.dot.warning { background: #ffcc00; }
+.dot.normal  { background: #4da6ff; }
+
+/* ========================= 스크롤바 스타일 ========================= */
+
+.event-list::-webkit-scrollbar,
+.event-detail::-webkit-scrollbar {
+    width: 8px;
+}
+
+.event-list::-webkit-scrollbar-thumb,
+.event-detail::-webkit-scrollbar-thumb {
+    background: #273544;
+    border-radius: 6px;
+}
+
+.event-list::-webkit-scrollbar-track,
+.event-detail::-webkit-scrollbar-track {
+    background: #121a24;
+}

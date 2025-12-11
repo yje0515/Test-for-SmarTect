@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base}">
+
+<head>
+    <title>대시보드</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+</head>
+
+<!--<body>-->
+
+<div layout:fragment="content">
+    <div class="dashboard-container">
+        <!-- 왼쪽 영역 -->
+        <div class="left-area">
+            <!-- CCTV 4개 -->
+            <div class="cctv-grid">
+                <div class="cctv-box" th:each="cam : ${cameraList}">
+                    <span th:text="${cam.name}">CCTV-01</span>
+                </div>
+            </div>
+            <!-- 실시간 알림 -->
+            <div class="alert-stream">실시간 알림 스트림</div>
+            <div class="alert-stream log-window">
+                <div>
+                    log.info("jnfsnjkwnuewiojwefdsfljsdkndnjk")<br>
+                    log.info("jnfsnjkwnuewiojwefdsfljsdkndnjk")<br>
+                </div>
+            </div>
+        </div>
+        <!-- 오른쪽 패널 -->
+        <div class="right-area">
+            <!-- 모니터링 -->
+            <div class="panel">
+                <h3>실시간 모니터링</h3>
+                <ul>
+                    <li>[Live Camera Feed Grid]</li>
+                    <li th:each="cam : ${cameraList}">
+                        <span th:text="${cam.name}"></span> :
+                        <span th:text="${cam.status}"></span>
+                    </li>
+                </ul>
+            </div>
+            <!-- 이벤트 요약 -->
+            <div class="panel">
+                <h3>오늘의 이벤트</h3>
+                <table class="event-table">
+                    <tr>
+                        <th>유형</th>
+                        <th>횟수</th>
+                    </tr>
+                    <tr th:each="ev : ${todayEventList}">
+                        <td>
+                            <span class="dot danger" th:if="${ev.type == '위험행동'}"></span>
+                            <span class="dot warning" th:if="${ev.type == '경미'}"></span>
+                            <span class="dot normal" th:if="${ev.type == '기타'}"></span>
+                            <span th:text="${ev.type}"></span>
+                        </td>
+                        <td th:text="${ev.count}"></td>
+                    </tr>
+                </table>
+            </div>
+            <!-- 실시간 이벤트 -->
+            <div class="panel">
+                <h3>실시간 이벤트</h3>
+                <ul>
+                    <li th:each="log : ${realtimeLogList}">
+                        <span th:text="${log.message}"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--</body>-->
+</html>
